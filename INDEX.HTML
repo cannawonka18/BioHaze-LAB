@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioHaze Lab - CBD Premium</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            transition: all 0.5s ease;
+        }
+
+        /* THÈME DÉMON (par défaut) */
+        body.theme-demon {
+            background: linear-gradient(135deg, #1a0f0f 0%, #2d1a1a 50%, #1a0f0f 100%);
+            background-attachment: fixed;
+            color: #ffffff;
+        }
+
+        body.theme-demon::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 0, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 100, 0, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* THÈME ANGE */
+        body.theme-angel {
+            background: linear-gradient(135deg, #0f3a1a 0%, #1a5c2a 50%, #0f3a1a 100%);
+            background-attachment: fixed;
+            color: #f0f8f5;
+        }
+
+        body.theme-angel::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(144, 238, 144, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(34, 139, 34, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid;
+            transition: all 0.5s ease;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        body.theme-demon header {
+            border-color: #ff2020;
+            background: rgba(20, 10, 10, 0.9);
+        }
+
+        body.theme-angel header {
+            border-color: #90ee90;
+            background: rgba(15, 58, 26, 0.9);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        body.theme-demon .logo {
+            color: #ff2020;
+            text-shadow: 0 0 10px rgba(255, 32, 32, 0.5), 2px 2px 0px rgba(255, 100, 0, 0.8);
+            border: 3px solid #ff2020;
+            padding: 8px 15px;
+        }
+
+        body.theme-angel .logo {
+            color: #90ee90;
+            text-shadow: 0 0 10px rgba(144, 238, 144, 0.5), 2px 2px 0px rgba(212, 175, 55, 0.6);
+            border: 3px solid #90ee90;
+            padding: 8px 15px;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-btn {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            letter-spacing: 1px;
+        }
+
+        body.theme-demon .cart-btn {
+            border-color: #ff2020;
+            color: #ff2020;
+        }
+
+        body.theme-demon .cart-btn:hover {
+            background: #ff2020;
+            color: #1a0f0f;
+            box-shadow: 0 0 20px rgba(255, 32, 32, 0.6);
+        }
+
+        body.theme-angel .cart-btn {
+            border-color: #90ee90;
+            color: #90ee90;
+        }
+
+        body.theme-angel .cart-btn:hover {
+            background: #90ee90;
+            color: #0f3a1a;
+            box-shadow: 0 0 20px rgba(144, 238, 144, 0.6);
+        }
+
+        /* THEME SELECTOR */
+        .theme-selector {
+            display: flex;
+            gap: 15px;
+            padding: 20px 30px;
+            justify-content: center;
+            border-bottom: 2px solid;
+            transition: all 0.5s ease;
+        }
+
+        body.theme-demon .theme-selector {
+            border-color: rgba(255, 32, 32, 0.3);
+            background: rgba(45, 26, 26, 0.5);
+        }
+
+        body.theme-angel .theme-selector {
+            border-color: rgba(144, 238, 144, 0.3);
+            background: rgba(15, 58, 26, 0.5);
+        }
+
+        .theme-btn {
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: 3px solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        body.theme-demon .theme-btn {
+            color: #ffffff;
+            border-color: #ff2020;
+        }
+
+        body.theme-demon .theme-btn:hover {
+            background: #ff2020;
+            color: #1a0f0f;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0px rgba(255, 100, 0, 0.8);
+        }
+
+        body.theme-demon .theme-btn.active {
+            background: #ff2020;
+            color: #1a0f0f;
+            box-shadow: 0 0 30px rgba(255, 32, 32, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        body.theme-angel .theme-btn {
+            color: #f0f8f5;
+            border-color: #90ee90;
+        }
+
+        body.theme-angel .theme-btn:hover {
+            background: #90ee90;
+            color: #0f3a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 0px rgba(212, 175, 55, 0.6);
+        }
+
+        body.theme-angel .theme-btn.active {
+            background: #90ee90;
+            color: #0f3a1a;
+            box-shadow:
